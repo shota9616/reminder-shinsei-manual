@@ -1,503 +1,526 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>助成金 電子申請マニュアル | 株式会社リマインダー</title>
-<style>
-  :root {
-    --primary: #2563eb;
-    --primary-light: #dbeafe;
-    --danger: #dc2626;
-    --danger-light: #fef2f2;
-    --success: #16a34a;
-    --success-light: #f0fdf4;
-    --warning: #d97706;
-    --warning-light: #fffbeb;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-600: #4b5563;
-    --gray-800: #1f2937;
-    --gray-900: #111827;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社リマインダー様 申請ガイド</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #e1effe;
+            --success: #0e9f6e;
+            --success-light: #def7ec;
+            --warning: #c27803;
+            --warning-light: #fdf6b2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --red: #dc2626;
+            --red-light: #fef2f2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
+            background: #f0f4f8;
+            color: var(--gray-800);
+            line-height: 1.8;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+            color: white;
+            padding: 48px 20px 40px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+        .hero .subtitle { opacity: 0.85; font-size: 0.85rem; }
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            backdrop-filter: blur(4px);
+        }
+        .container { max-width: 720px; margin: -24px auto 40px; padding: 0 16px; position: relative; z-index: 1; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Progress bar */
+        .progress-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .progress-dot {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .progress-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        .progress-arrow {
+            margin: 0 16px;
+            color: var(--gray-400);
+            font-size: 1.2rem;
+        }
 
-  body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
-    color: var(--gray-800);
-    background: var(--gray-50);
-    line-height: 1.8;
-    font-size: 16px;
-  }
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .card-header {
+            padding: 20px 24px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .card-num {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+        .card-subtitle { font-size: 0.82rem; color: var(--gray-600); }
+        .card-body { padding: 16px 24px 24px; }
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+        .section-divider {
+            border: none;
+            border-top: 2px dashed var(--gray-200);
+            margin: 20px 0;
+        }
+        .section-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-  /* Header */
-  .header {
-    background: linear-gradient(135deg, #1e40af, #3b82f6);
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-    border-radius: 0 0 20px 20px;
-    margin-bottom: 30px;
-  }
-  .header h1 {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  .header .subtitle {
-    font-size: 14px;
-    opacity: 0.9;
-  }
-  .deadline-banner {
-    background: var(--danger);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    margin-top: 16px;
-    display: inline-block;
-    font-weight: bold;
-    font-size: 15px;
-  }
+        /* File download row */
+        .file-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+        }
+        .file-row:last-child { margin-bottom: 0; }
+        .file-icon { font-size: 1.3rem; margin-right: 10px; }
+        .file-info { flex: 1; }
+        .file-name { font-weight: 600; font-size: 0.9rem; }
+        .file-desc { font-size: 0.78rem; color: var(--gray-600); }
 
-  /* Cards */
-  .card {
-    background: white;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    border: 1px solid var(--gray-200);
-  }
-  .card h2 {
-    font-size: 20px;
-    margin-bottom: 16px;
-    color: var(--gray-900);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card h3 {
-    font-size: 16px;
-    margin: 16px 0 8px;
-    color: var(--gray-800);
-  }
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #1648b8; }
+        .btn-outline { background: white; color: var(--primary); border: 1.5px solid var(--primary); }
+        .btn-outline:hover { background: var(--primary-light); }
+        .btn-green { background: var(--success); color: white; }
+        .btn-green:hover { background: #0c8a5e; }
+        .btn-sm { padding: 6px 14px; font-size: 0.78rem; }
 
-  /* Steps */
-  .step {
-    background: white;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 16px;
-    border-left: 4px solid var(--primary);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  .step-number {
-    background: var(--primary);
-    color: white;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    margin-right: 8px;
-  }
-  .step h3 {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    margin-bottom: 12px;
-    color: var(--gray-900);
-  }
+        /* Input fields list */
+        .input-table { width: 100%; }
+        .input-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.88rem;
+        }
+        .input-row:last-child { border-bottom: none; }
+        .input-label { flex: 1; }
+        .input-cell {
+            background: var(--warning-light);
+            color: var(--warning);
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        .sheet-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            margin: 12px 0 4px;
+        }
 
-  /* Lists */
-  ul, ol {
-    padding-left: 24px;
-    margin: 8px 0;
-  }
-  li {
-    margin-bottom: 6px;
-  }
+        /* Numbered steps */
+        .flow-list { list-style: none; counter-reset: flow; margin-top: 12px; }
+        .flow-list li {
+            counter-increment: flow;
+            padding: 10px 0 10px 44px;
+            position: relative;
+            font-size: 0.88rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .flow-list li:last-child { border-bottom: none; }
+        .flow-list li::before {
+            content: counter(flow);
+            position: absolute; left: 0; top: 10px;
+            width: 28px; height: 28px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem;
+        }
 
-  /* Alert boxes */
-  .alert {
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin: 12px 0;
-    font-size: 14px;
-  }
-  .alert-danger {
-    background: var(--danger-light);
-    border: 1px solid #fecaca;
-    color: var(--danger);
-  }
-  .alert-success {
-    background: var(--success-light);
-    border: 1px solid #bbf7d0;
-    color: var(--success);
-  }
-  .alert-warning {
-    background: var(--warning-light);
-    border: 1px solid #fde68a;
-    color: var(--warning);
-  }
-  .alert-info {
-    background: var(--primary-light);
-    border: 1px solid #bfdbfe;
-    color: var(--primary);
-  }
+        /* Alert boxes */
+        .alert {
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.85rem;
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+        }
+        .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+        .alert-blue { background: var(--primary-light); color: #1e40af; }
+        .alert-yellow { background: var(--warning-light); color: #92400e; }
+        .alert-red { background: var(--red-light); color: var(--red); border: 1px solid #fecaca; }
 
-  /* Links */
-  a {
-    color: var(--primary);
-    text-decoration: none;
-    word-break: break-all;
-  }
-  a:hover { text-decoration: underline; }
+        /* Schedule */
+        .schedule { margin-top: 12px; }
+        .schedule-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.88rem;
+        }
+        .schedule-row:last-child { border-bottom: none; }
+        .schedule-label { width: 110px; font-weight: 600; color: var(--gray-600); flex-shrink: 0; }
+        .schedule-val { flex: 1; }
 
-  .link-button {
-    display: inline-block;
-    background: var(--primary);
-    color: white !important;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    margin: 8px 0;
-    text-decoration: none !important;
-  }
-  .link-button:hover {
-    background: #1d4ed8;
-  }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 16px 40px;
+            color: var(--gray-400);
+            font-size: 0.75rem;
+        }
 
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 14px;
-  }
-  th {
-    background: var(--gray-100);
-    text-align: left;
-    padding: 10px 12px;
-    border: 1px solid var(--gray-200);
-    font-weight: bold;
-    white-space: nowrap;
-  }
-  td {
-    padding: 10px 12px;
-    border: 1px solid var(--gray-200);
-    vertical-align: top;
-  }
-
-  /* Prep items */
-  .prep-item {
-    background: var(--gray-50);
-    border-radius: 12px;
-    padding: 16px;
-    margin: 12px 0;
-    border: 1px solid var(--gray-200);
-  }
-  .prep-item h4 {
-    font-size: 15px;
-    margin-bottom: 8px;
-    color: var(--gray-900);
-  }
-  .prep-item .status {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  .status-done {
-    background: #dcfce7;
-    color: var(--success);
-  }
-  .status-todo {
-    background: #fef3c7;
-    color: var(--warning);
-  }
-
-  /* Checklist */
-  .checklist {
-    list-style: none;
-    padding-left: 0;
-  }
-  .checklist li {
-    padding: 8px 0 8px 32px;
-    position: relative;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .checklist li::before {
-    content: '☐';
-    position: absolute;
-    left: 4px;
-    font-size: 18px;
-    color: var(--gray-600);
-  }
-
-  /* Input reference */
-  .input-group {
-    background: var(--gray-50);
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin: 8px 0;
-  }
-  .input-group .label {
-    font-size: 12px;
-    color: var(--gray-600);
-    margin-bottom: 2px;
-  }
-  .input-group .value {
-    font-weight: bold;
-    color: var(--gray-900);
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 30px 20px;
-    color: var(--gray-600);
-    font-size: 13px;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .container { padding: 12px; }
-    .header { padding: 30px 16px; }
-    .header h1 { font-size: 20px; }
-    .card, .step { padding: 18px; }
-    table { font-size: 13px; }
-    th, td { padding: 8px; }
-  }
-</style>
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 32px; }
+            .hero h1 { font-size: 1.35rem; }
+            .card-body { padding: 14px 18px 20px; }
+            .file-row { flex-wrap: wrap; gap: 8px; }
+            .file-row .btn { width: 100%; justify-content: center; }
+            .progress-label { display: none; }
+            .progress-arrow { margin: 0 10px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>📋 助成金 電子申請マニュアル</h1>
-  <div class="subtitle">事業環境変化に対応した経営基盤強化事業（一般コース）第6回</div>
-  <div class="deadline-banner">⏰ 申請期限：令和8年3月2日（月）9:00 〜 3月13日（金）16:00</div>
+<!-- Hero -->
+<div class="hero">
+    <h1>📋 申請ガイド</h1>
+    <p class="subtitle">株式会社リマインダー 様</p>
+    <div class="badge">東京都中小企業振興公社 経営基盤強化事業（一般コース）第6回</div>
 </div>
 
 <div class="container">
 
-  <!-- はじめに -->
-  <div class="card">
-    <h2>🔰 はじめに</h2>
-    <p>申請は<strong>すべてインターネット上で完結</strong>します。</p>
-    <p>必要なものは <strong>パソコン</strong> と <strong>gBizIDプライムのアカウント</strong> だけです。</p>
-    <div class="alert alert-info">💡 先着順ではありません。期間内に申請すればOKです。</div>
-  </div>
-
-  <!-- 事前準備 -->
-  <div class="card">
-    <h2>📦 事前に準備するもの（3点）</h2>
-
-    <div class="prep-item">
-      <h4>① 申請書（Excel） <span class="status status-done">✅ 作成済み</span></h4>
-      <p>Google Driveからダウンロードしてください。</p>
-      <a href="https://drive.google.com/drive/folders/15yutV16NVQKXcznRo0z98y5fGXbqKn6r" target="_blank" class="link-button">📁 提出用フォルダを開く</a>
-      <div class="alert alert-danger">
-        <strong>⚠️ ダウンロード前に、黄色セルの2箇所をご記入ください：</strong>
-        <ul style="margin-top:6px;">
-          <li><strong>E-mailアドレス</strong>（「申請者1」シート）</li>
-          <li><strong>主要取引先の年間取引高</strong>（「申請者2」シート）</li>
-        </ul>
-      </div>
-      <p style="font-size:13px;color:var(--gray-600);">※ダウンロード方法：ファイルを開く →「ファイル」→「ダウンロード」→「Microsoft Excel (.xlsx)」</p>
+    <!-- Progress -->
+    <div class="progress-bar">
+        <div class="progress-step">
+            <div class="progress-dot">1</div>
+            <span class="progress-label">申請書を記入</span>
+        </div>
+        <span class="progress-arrow">→</span>
+        <div class="progress-step">
+            <div class="progress-dot">2</div>
+            <span class="progress-label">Jグランツで申請</span>
+        </div>
     </div>
 
-    <div class="prep-item">
-      <h4>② 誓約書（反社会的勢力排除に関する誓約書） <span class="status status-todo">📝 要準備</span></h4>
-      <p>事業者名・代表者名は記入済みです。以下の手順でご準備ください：</p>
-      <ol>
-        <li>下のリンクからExcelを開く</li>
-        <li><strong>提出日</strong>（クリーム色のセル）にご記入ください</li>
-        <li>印刷 → <strong>押印</strong>（代表者印）</li>
-        <li>スキャンしてPDFまたはJPEGに</li>
-      </ol>
-      <a href="https://docs.google.com/spreadsheets/d/13yiyoNMDfjsEFUzhUs_f1lp0WDqWBomj/edit" target="_blank" class="link-button">📄 Driveで開く（反社排除）</a>
+    <!-- ============================================ -->
+    <!-- STEP 1: 申請書を記入する -->
+    <!-- ============================================ -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num">1</div>
+            <div>
+                <div class="card-title">申請書を記入する</div>
+                <div class="card-subtitle">黄色に塗られたセルだけ記入してください。それ以外は記入済みです。</div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <!-- 開くボタン -->
+            <div class="section-label">① 申請書を開く</div>
+            <a href="https://docs.google.com/spreadsheets/d/1no2Wixo8Gpblz9DdsLEuHakbdblAoeQB/edit" target="_blank" class="btn btn-primary">📊 申請書をGoogle Sheetsで開く</a>
+
+            <hr class="section-divider">
+
+            <!-- 記入項目 -->
+            <div class="section-label">② 黄色セルに記入</div>
+
+            <div class="sheet-tag">申請者1 シート</div>
+            <div class="input-table">
+                <div class="input-row">
+                    <span class="input-label">太田 秀樹さんの <strong>メールアドレス</strong></span>
+                    <span class="input-cell">G21</span>
+                </div>
+            </div>
+
+            <div class="sheet-tag">申請者2 シート</div>
+            <div class="input-table">
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 1社目</strong>：年間取引高</span>
+                    <span class="input-cell">I7</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 2社目</strong>：年間取引高</span>
+                    <span class="input-cell">I8</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 3社目</strong>：年間取引高</span>
+                    <span class="input-cell">I9</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 4社目</strong>：年間取引高</span>
+                    <span class="input-cell">I10</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 5社目</strong>：年間取引高</span>
+                    <span class="input-cell">I11</span>
+                </div>
+            </div>
+
+            <div class="alert alert-blue">
+                <span class="alert-icon">💡</span>
+                <div>主要取引先の社名はすでに記入済みです。<strong>年間取引高（金額）</strong>のみご記入ください。</div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- DL手順 -->
+            <div class="section-label">③ 記入が終わったらExcelでダウンロード</div>
+            <ol class="flow-list">
+                <li>Google Sheetsのメニュー「<strong>ファイル</strong>」を開く</li>
+                <li>「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」を選択</li>
+                <li>ダウンロードしたファイルは、STEP 2で使います</li>
+            </ol>
+
+            <div class="alert alert-yellow">
+                <span class="alert-icon">⚠️</span>
+                <div>Google Sheets上では書式が崩れて見えますが、Excelで開けば正常です。</div>
+            </div>
+        </div>
     </div>
 
-    <div class="prep-item">
-      <h4>③ 誓約書（助成金申請に係る誓約書） <span class="status status-todo">📝 要準備</span></h4>
-      <p>事業者名・代表者名は記入済みです。以下の手順でご準備ください：</p>
-      <ol>
-        <li>下のリンクからExcelを開く</li>
-        <li><strong>提出日</strong>（クリーム色のセル）にご記入ください</li>
-        <li>印刷 → <strong>押印</strong>（代表者印）</li>
-        <li>スキャンしてPDFまたはJPEGに</li>
-      </ol>
-      <a href="https://docs.google.com/spreadsheets/d/1nfe_dyaBbXiZhZ9PFOIonnhLZqU7acCA/edit" target="_blank" class="link-button">📄 Driveで開く（助成金申請）</a>
+    <!-- ============================================ -->
+    <!-- STEP 2: Jグランツで申請する -->
+    <!-- ============================================ -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num">2</div>
+            <div>
+                <div class="card-title">Jグランツで申請する</div>
+                <div class="card-subtitle">電子申請システム「Jグランツ」から書類を提出します。</div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <!-- gBizID -->
+            <div class="section-label">🔑 事前準備：gBizIDプライム</div>
+            <div class="file-row">
+                <span class="file-icon">🔑</span>
+                <div class="file-info">
+                    <div class="file-name">gBizIDプライムが必要です</div>
+                    <div class="file-desc">未取得の場合は先にアカウントを作成してください（審査に約1週間）</div>
+                </div>
+                <a href="https://gbiz-id.go.jp/" target="_blank" class="btn btn-outline btn-sm">gBizID →</a>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- 申請手順 -->
+            <div class="section-label">📝 申請手順</div>
+            <ol class="flow-list">
+                <li><a href="https://www.jgrants-portal.go.jp/" target="_blank"><strong>Jグランツ</strong></a>にgBizIDでログイン</li>
+                <li>「<strong>経営基盤強化</strong>」で検索し、<strong>一般コース 第6回</strong>の申請画面を開く</li>
+                <li>申請フォームに基本情報を入力（下記参照）</li>
+                <li>STEP 1でダウンロードした<strong>申請書（.xlsx）</strong>をアップロード</li>
+                <li>下の<strong>誓約書2通</strong>をダウンロードしてアップロード</li>
+                <li>同意事項にチェック → 「<strong>申請する</strong>」ボタンで送信 🎉</li>
+            </ol>
+
+            <hr class="section-divider">
+
+            <!-- Jグランツ入力項目 -->
+            <div class="section-label">📋 Jグランツの入力項目（③で使います）</div>
+            <p style="font-size:0.82rem; color:var(--gray-600); margin-bottom:10px;">赤枠の項目はgBizIDから自動入力されます。青枠「必須」の項目を入力してください。</p>
+
+            <div class="sheet-tag">事業者基本情報</div>
+            <div class="input-table">
+                <div class="input-row"><span class="input-label">法人名（カナ）</span><span style="font-weight:600">カブシキガイシャ リマインダー</span></div>
+                <div class="input-row"><span class="input-label">本社所在地（郵便番号）</span><span style="font-weight:600">161-0033</span></div>
+                <div class="input-row"><span class="input-label">代表者名（セイ・メイ）</span><span style="font-weight:600">オオタ　ヒデキ</span></div>
+                <div class="input-row"><span class="input-label">代表者電話番号</span><span style="font-weight:600">03-5809-2227</span></div>
+                <div class="input-row"><span class="input-label">代表者メールアドレス</span><span style="font-weight:600;color:var(--red)">※ご自身のメールアドレス</span></div>
+                <div class="input-row"><span class="input-label">資本金（円）</span><span style="font-weight:600">9600000</span></div>
+                <div class="input-row"><span class="input-label">従業員数</span><span style="font-weight:600">0</span></div>
+                <div class="input-row"><span class="input-label">主たる業種</span><span style="font-weight:600">情報通信業</span></div>
+            </div>
+
+            <div class="sheet-tag">担当者情報</div>
+            <div class="input-table">
+                <div class="input-row"><span class="input-label">連絡先住所</span><span style="font-weight:600">〒161-0033 東京都新宿区下落合三丁目2番18号</span></div>
+                <div class="input-row"><span class="input-label">建物名</span><span style="font-weight:600">ニュー目白マンション406号室</span></div>
+                <div class="input-row"><span class="input-label">担当者氏名</span><span style="font-weight:600">太田 秀樹（オオタ ヒデキ）</span></div>
+                <div class="input-row"><span class="input-label">会社部署名</span><span style="font-weight:600">代表取締役</span></div>
+            </div>
+
+            <div class="sheet-tag">実施場所</div>
+            <div class="input-table">
+                <div class="input-row"><span class="input-label">実施場所名称</span><span style="font-weight:600">株式会社リマインダー 本社</span></div>
+                <div class="input-row"><span class="input-label">所在地</span><span style="font-weight:600">〒161-0033 東京都新宿区下落合三丁目2番18号 ニュー目白マンション406号室</span></div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- 誓約書DL -->
+            <div class="section-label">📄 誓約書のダウンロード（⑤で使います）</div>
+            <p style="font-size:0.82rem; color:var(--gray-600); margin-bottom:10px;">事業者名・代表者名は記入済みです。ダウンロードして、そのままJグランツにアップロードしてください。</p>
+
+            <div class="file-row">
+                <span class="file-icon">📄</span>
+                <div class="file-info">
+                    <div class="file-name">反社会的勢力排除に関する誓約書</div>
+                    <div class="file-desc">記入済み・提出日のみご記入ください</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/13yiyoNMDfjsEFUzhUs_f1lp0WDqWBomj/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
+            </div>
+            <div class="file-row">
+                <span class="file-icon">📄</span>
+                <div class="file-info">
+                    <div class="file-name">助成金申請に係る誓約書</div>
+                    <div class="file-desc">記入済み・提出日のみご記入ください</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1nfe_dyaBbXiZhZ9PFOIonnhLZqU7acCA/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
+            </div>
+
+            <div class="alert alert-yellow">
+                <span class="alert-icon">⚠️</span>
+                <div>申請書は<strong>Excel形式（.xlsx）のまま</strong>アップロードしてください。PDFやZIPに変換しないでください。</div>
+            </div>
+
+            <div class="alert alert-blue">
+                <span class="alert-icon">📎</span>
+                <div><strong>書類審査を通過した場合のみ</strong>、追加書類の提出があります（申請時点では不要です）。</div>
+            </div>
+        </div>
     </div>
 
-    <div class="alert alert-warning">💡 誓約書は<strong>2種類</strong>あります。間違えないようにご注意ください。</div>
-  </div>
+    <!-- ============================================ -->
+    <!-- スケジュール -->
+    <!-- ============================================ -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num" style="background: var(--gray-800);">📅</div>
+            <div>
+                <div class="card-title">スケジュール</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="schedule">
+                <div class="schedule-row">
+                    <div class="schedule-label">申請期限</div>
+                    <div class="schedule-val"><strong>令和8年3月2日（月）9:00 〜 3月13日（金）16:00</strong></div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">書類審査</div>
+                    <div class="schedule-val">申請後〜</div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">面接審査</div>
+                    <div class="schedule-val">書類審査通過後<br><small style="color:var(--gray-600)">※代表者＋従業員最大2名（コンサル同席不可）</small></div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">交付決定</div>
+                    <div class="schedule-val">面接審査後〜</div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">助成対象期間</div>
+                    <div class="schedule-val">交付決定日から<strong>1年間</strong></div>
+                </div>
+            </div>
 
-  <!-- STEP 1 -->
-  <div class="step">
-    <h3><span class="step-number">1</span> Jグランツにログイン</h3>
-    <ol>
-      <li>Jグランツにアクセス<br>
-        <a href="https://www.jgrants-portal.go.jp/" target="_blank" class="link-button">🌐 Jグランツを開く</a>
-      </li>
-      <li>右上の<strong>「ログイン」</strong>をクリック</li>
-      <li><strong>gBizIDプライム</strong>のID・パスワードでログイン</li>
-    </ol>
-    <div class="alert alert-info">
-      gBizIDプライムをまだお持ちでない場合 → <a href="https://gbiz-id.go.jp/" target="_blank">https://gbiz-id.go.jp/</a> から取得（審査に約1週間）
+            <div class="alert alert-red">
+                <span class="alert-icon">🚨</span>
+                <div><strong>交付決定前の発注・契約は絶対にできません。</strong>交付決定通知を受けてから業者に発注してください。</div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- STEP 2 -->
-  <div class="step">
-    <h3><span class="step-number">2</span> 助成金を検索</h3>
-    <ol>
-      <li>ログイン後、<strong>「補助金を探す」</strong>をクリック</li>
-      <li>検索欄に <strong>「経営基盤強化」</strong> と入力して検索</li>
-      <li>一覧から<br><strong>「事業環境変化に対応した経営基盤強化事業助成金（一般コース）【令和7年度第6回】」</strong><br>をクリック</li>
-    </ol>
-  </div>
-
-  <!-- STEP 3 -->
-  <div class="step">
-    <h3><span class="step-number">3</span> 申請ページを開く</h3>
-    <ol>
-      <li>事業の説明ページが表示されます</li>
-      <li><strong>一番下までスクロール</strong>してください</li>
-      <li><strong>「申請する」</strong>ボタンをクリック</li>
-    </ol>
-  </div>
-
-  <!-- STEP 4 -->
-  <div class="step">
-    <h3><span class="step-number">4</span> 事業者情報を入力</h3>
-    <p>申請フォームが開きます。</p>
-    <ul>
-      <li>🔴 <strong>赤枠の項目</strong> → gBizIDから自動入力済み（変更不要）</li>
-      <li>🔵 <strong>青枠・「必須」の項目</strong> → 手動入力が必要</li>
-    </ul>
-
-    <h4 style="margin-top:16px;">【事業者基本情報】</h4>
-    <div class="input-group"><div class="label">法人名（カナ）</div><div class="value">カブシキガイシャ リマインダー</div></div>
-    <div class="input-group"><div class="label">本社所在地（郵便番号）</div><div class="value">161-0033</div></div>
-    <div class="input-group"><div class="label">代表者名（セイ・メイ）</div><div class="value">オオタ　ヒデキ</div></div>
-    <div class="input-group"><div class="label">代表者電話番号</div><div class="value">03-5809-2227</div></div>
-    <div class="input-group"><div class="label">代表者メールアドレス</div><div class="value">※太田様のメールアドレスをご入力ください</div></div>
-    <div class="input-group"><div class="label">資本金（円）</div><div class="value">9600000</div></div>
-    <div class="input-group"><div class="label">従業員数</div><div class="value">0</div></div>
-    <div class="input-group"><div class="label">主たる業種</div><div class="value">ドロップダウンから「情報通信業」を選択</div></div>
-
-    <h4 style="margin-top:16px;">【担当者情報】</h4>
-    <div class="input-group"><div class="label">連絡先郵便番号</div><div class="value">161-0033</div></div>
-    <div class="input-group"><div class="label">連絡先住所</div><div class="value">東京都 新宿区 下落合三丁目2番18号</div></div>
-    <div class="input-group"><div class="label">建物名</div><div class="value">ニュー目白マンション406号室</div></div>
-    <div class="input-group"><div class="label">担当者氏名</div><div class="value">太田 秀樹（オオタ ヒデキ）</div></div>
-    <div class="input-group"><div class="label">会社部署名</div><div class="value">代表取締役</div></div>
-    <div class="input-group"><div class="label">連絡先電話番号</div><div class="value">03-5809-2227</div></div>
-    <div class="input-group"><div class="label">担当者メールアドレス</div><div class="value">※太田様のメールアドレスをご入力ください</div></div>
-
-    <h4 style="margin-top:16px;">【実施場所】</h4>
-    <div class="input-group"><div class="label">実施場所名称</div><div class="value">株式会社リマインダー 本社</div></div>
-    <div class="input-group"><div class="label">所在地</div><div class="value">〒161-0033 東京都新宿区下落合三丁目2番18号 ニュー目白マンション406号室</div></div>
-  </div>
-
-  <!-- STEP 5 -->
-  <div class="step">
-    <h3><span class="step-number">5</span> 書類をアップロード</h3>
-    <p>フォーム下部の<strong>「ファイルを選択」</strong>ボタンから、以下の3ファイルをアップロードしてください。</p>
-
-    <table>
-      <tr>
-        <th>アップロード欄</th>
-        <th>ファイル</th>
-        <th>形式</th>
-      </tr>
-      <tr>
-        <td>申請様式</td>
-        <td><a href="https://docs.google.com/spreadsheets/d/1no2Wixo8Gpblz9DdsLEuHakbdblAoeQB/edit" target="_blank">①申請書_株式会社リマインダー.xlsx</a><br><span style="font-size:12px;color:var(--gray-600);">※Driveからダウンロードして提出</span></td>
-        <td><strong>Excel (.xlsx)</strong></td>
-      </tr>
-      <tr>
-        <td>誓約書（反社排除）</td>
-        <td><a href="https://docs.google.com/spreadsheets/d/13yiyoNMDfjsEFUzhUs_f1lp0WDqWBomj/edit" target="_blank">③誓約書（反社会的勢力排除）</a><br><span style="font-size:12px;color:var(--gray-600);">※印刷→押印→スキャンして提出</span></td>
-        <td>PDF or JPEG</td>
-      </tr>
-      <tr>
-        <td>誓約書（助成金申請）</td>
-        <td><a href="https://docs.google.com/spreadsheets/d/1nfe_dyaBbXiZhZ9PFOIonnhLZqU7acCA/edit" target="_blank">②誓約書（助成金申請に係る誓約書）</a><br><span style="font-size:12px;color:var(--gray-600);">※印刷→押印→スキャンして提出</span></td>
-        <td>PDF or JPEG</td>
-      </tr>
-    </table>
-
-    <div class="alert alert-danger">
-      <strong>⚠️ 重要：</strong>申請書は<strong>Excel形式（.xlsx）のまま</strong>アップロードしてください。PDFやZIPに変換しないでください。
+    <!-- お問い合わせ -->
+    <div class="card">
+        <div class="card-header" style="padding-bottom: 20px;">
+            <div class="card-num" style="background: var(--gray-400);">💬</div>
+            <div>
+                <div class="card-title">ご不明点</div>
+                <div class="card-subtitle">ご質問がございましたら、担当の鎌倉までお気軽にご連絡ください。</div>
+            </div>
+        </div>
     </div>
-    <p style="font-size:13px;color:var(--gray-600);">※1ファイルあたり16MB以内</p>
-  </div>
 
-  <!-- STEP 6 -->
-  <div class="step">
-    <h3><span class="step-number">6</span> 同意して申請する</h3>
-    <ul class="checklist">
-      <li>「利用規約に同意する」→ スイッチを<strong>右にスライド（ON）</strong></li>
-      <li>「個人情報の取扱い」→ スイッチを<strong>右にスライド（ON）</strong></li>
-      <li>「手続サクサクプロジェクト」→ どちらでもOK</li>
-      <li>すべて入力・アップロードできたら<strong>「申請する」</strong>ボタンをクリック</li>
-    </ul>
-    <div class="alert alert-danger">
-      <strong>⚠️ 一度申請すると取り下げができません。</strong>内容をよくご確認のうえ、ボタンを押してください。
-    </div>
-  </div>
+</div>
 
-  <!-- STEP 7 -->
-  <div class="step">
-    <h3><span class="step-number">7</span> 完了！ 🎉</h3>
-    <p>「申請を事務局に提出しました」のダイアログが出れば<strong>完了</strong>です。</p>
-    <p>「OK」をクリックしてください。</p>
-    <div class="alert alert-success">✅ マイページの「申請履歴」から申請状況をいつでも確認できます。</div>
-  </div>
-
-  <!-- 申請後の流れ -->
-  <div class="card">
-    <h2>📌 申請後の流れ</h2>
-    <table>
-      <tr><th>ステップ</th><th>内容</th></tr>
-      <tr><td>①</td><td>書類審査（申請後〜）</td></tr>
-      <tr><td>②</td><td>書類審査を通過した場合 → 追加書類の提出依頼<br><span style="font-size:13px;color:var(--gray-600);">（履歴事項全部証明書・納税証明書・決算書・見積書等）</span></td></tr>
-      <tr><td>③</td><td>面接審査（代表者＋従業員最大2名が出席）</td></tr>
-      <tr><td>④</td><td>交付決定 → 助成事業の開始</td></tr>
-    </table>
-    <div class="alert alert-info">💡 追加書類は書類審査を通過した場合のみ。<strong>申請時には不要です。</strong></div>
-  </div>
-
-  <!-- お問い合わせ -->
-  <div class="card">
-    <h2>❓ お困りの場合</h2>
-    <h3>事業環境変化に対応した経営基盤強化事業事務局</h3>
-    <p><strong>📞 TEL：03-4446-2560</strong></p>
-    <p>受付時間：平日 9:00〜16:30</p>
-
-    <h3 style="margin-top:16px;">gBizIDに関するお問い合わせ</h3>
-    <p><strong>📞 GビズIDヘルプデスク：0570-023-797</strong></p>
-  </div>
-
-  <div class="footer">
-    <p>作成：株式会社KMST</p>
-  </div>
-
+<div class="footer">
+    株式会社KMST — 申請サポート
 </div>
 
 </body>
